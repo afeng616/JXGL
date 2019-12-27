@@ -1,8 +1,7 @@
 package team.afeng.jxgl.mapper;
 
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import team.afeng.jxgl.entity.StuInfo;
 import team.afeng.jxgl.entity.User;
 
 import java.util.List;
@@ -20,5 +19,5 @@ public interface UserMapper {
 
     // 查看个人信息
     @Select("select * from db_jxgl.tb_stuinfo where number = #{id}")
-    User queryUserInfo(String id);
+    StuInfo queryUserInfo(String id);
 }
