@@ -5,7 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import team.afeng.jxgl.mapper.UserMapper;
+import team.afeng.jxgl.mapper.StuMapper;
 
 /**
  * Author: Afeng
@@ -17,7 +17,7 @@ import team.afeng.jxgl.mapper.UserMapper;
 @SpringBootTest(classes = JxglApplication.class)
 public class MyBatisTest {
     @Autowired
-    private UserMapper userMapper;
+    private StuMapper userMapper;
 
     @Test
     public void test() {

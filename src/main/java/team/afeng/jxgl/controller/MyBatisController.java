@@ -3,11 +3,11 @@ package team.afeng.jxgl.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import team.afeng.jxgl.entity.StuInfo;
-import team.afeng.jxgl.entity.User;
-import team.afeng.jxgl.mapper.UserMapper;
+import team.afeng.jxgl.entity.*;
+import team.afeng.jxgl.mapper.StuMapper;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -21,41 +21,69 @@ import java.util.List;
 @Controller
 public class MyBatisController {
     @Autowired
-    private UserMapper userMapper;
+    private StuMapper stuMapper;
 
     @RequestMapping("query")
     @ResponseBody
     public List<User> queryUserList() {
-        return userMapper.queryUserList();
+        return stuMapper.queryUserList();
     }
 
     // 查看个人信息
-    @RequestMapping("info")
+    @RequestMapping("/stu/info")
     @ResponseBody
     public StuInfo queryUserInfo(HttpServletRequest request) {
-        String user = request.getUserPrincipal().getName();
-        return userMapper.queryUserInfo(user);
+        String id = request.getUserPrincipal().getName();
+        return stuMapper.queryUserInfo(id);
+    }
+
+    // 登录
+    @RequestMapping(value = "/user/login", method = RequestMethod.POST)
+    @ResponseBody
+    public boolean login(@RequestParam("id") String id, @RequestParam("password") String password) {
+        return stuMapper.login(id, password);
     }
 
     // 上课任务
-    @RequestMapping("course")
+    @RequestMapping("/stu/course")
     @ResponseBody
-    public String queryCourse(@RequestParam("week") String week) {
-
-        return "暂无第" + week + "周课表数据";
+    public List<Course> queryCourse(@RequestParam("week") int week) {
+        // "courses": [{"cname": "Web技术开发", "teacher": "曹彩凤", "site": "北主楼101", "content": "如何学好Web开发", "time": "0102"}]
+        return stuMapper.queryCourseInWeek(week);
     }
 
-
     // 考试安排
-
+    @RequestMapping("/stu/exam")
+    @ResponseBody
+    public List<Exam> queryExam(HttpServletRequest request) {
+        String id = request.getUserPrincipal().getName();
+        return stuMapper.queryExam(id);
+    }
 
     // 考试成绩
-
+    @RequestMapping("/stu/score")
+    @ResponseBody
+    List<Score> queryScore(HttpServletRequest request) {
+        String id = request.getUserPrincipal().getName();
+        return stuMapper.queryScore(id);
+    }
 
     // 学业预警
-
+    @RequestMapping("/stu/warn")
+    @ResponseBody
+    List<Warn> queryWarn(HttpServletRequest request) {
+        String id = request.getUserPrincipal().getName();
+        return stuMapper.queryWarn(id);
+    }
 
     // 考勤情况
+    @RequestMapping("/stu/attendance")
+    @ResponseBody
+    List<Attendance> queryAttendance(HttpServletRequest request) {
+        String id = request.getUserPrincipal().getName();
+        return stuMapper.queryAttendance(id);
+    }
+
 
 
 }

@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 查看博客第二种模式使用https://www.cnblogs.com/ityouknow/p/6037431.html -->
-<mapper namespace="team.afeng.jxgl.mapper.UserMapper">
+<mapper namespace="team.afeng.jxgl.mapper.StuMapper">
     <select id="queryUserList" resultType="User">
         select * from db_test.tb_user
     </select>

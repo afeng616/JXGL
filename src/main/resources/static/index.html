@@ -154,58 +154,55 @@
                 <th>说明</th>
             </tr>
             <tr>
-                <td>/info GET</td>
+                <td>/stu/info GET</td>
                 <td>个人信息</td>
                 <td></td>
-                <td>{"status": true, "name": "张三", "sex": "男", "classnum": "170806", "profession": "计算机科学与技术",
-                    "college": "计算机学院", "number": "3117000001"}
+
+                <td>{"number":"3117000000","name":"张三","sex":"男","profession":"电子信息工程（信息安全）",
+                    "classnum":"170806","college":"计算机学院","status":"正常"}
                 </td>
-                <td></td>
+                <td>status为当前学籍状态</td>
             </tr>
             <tr>
-                <td>/course GET</td>
+                <td>/stu/course GET</td>
                 <td>上课任务</td>
                 <td>{"week": 2}</td>
-                <td>{"status": true, "courses": [{"cname": "Web技术开发", "teacher": "曹彩凤", "site": "北主楼101", "content":
-                    "如何学好Web开发", "time": "0102"}]}
+                <td>[{"cname":"C语言程序设计","tname":"老师甲","csite":"北主楼101","content":"暂无","ctime":11}]
                 </td>
                 <td>根据周次，仅可查询本人课表</td>
             </tr>
             <tr>
-                <td>/exam GET</td>
+                <td>/stu/exam GET</td>
                 <td>考试安排</td>
                 <td></td>
-                <td>{"status": true, "examinations": [{"sname": "张三", "cname": "Web技术开发", "hours": "48", "credit": "3",
-                    "type": "闭卷", "site": "北主楼111", "time": "2019/12/12 14:30-16:00"}]}
+                <td>[{"tname":"老师丁","cname":"大学英语","esite":"北主楼401","ebtime":"2019-10-14 09:30:00","eetime":"2019-10-14 11:30:00","etype":1}]
                 </td>
-                <td></td>
+                <td>etype：0开卷、1闭卷、2机考</td>
             </tr>
             <tr>
-                <td>/score GET</td>
+                <td>/stu/score GET</td>
                 <td>考试成绩</td>
                 <td></td>
-                <td>{"status": true, "scores": ["semester": "2019-2020","sname": "张三", "cname": "Web技术开发", "hours":
-                    "48",
-                    "credit": "3", "score": 99]}
+                <td>[{"tname":"老师甲","cname":"C语言程序设计","chours":48,"ccredit":3,"cscore":79}]
                 </td>
                 <td></td>
             </tr>
             <tr>
-                <td>/warn GET</td>
+                <td>/stu/warn GET</td>
                 <td>学业预警</td>
                 <td></td>
-                <td>{"status": true, "semester": "2018-2019", "sname": "张三", "class": "170806", "type": 1}</td>
-                <td>1:一般预警，2:严重预警</td>
+                <td>[{"number":"3117000000","name":"张三","semester":"2018-2019","classnum":"170806","type":1}]</td>
+                <td>type：1一般预警、2严重预警</td>
             </tr>
             <tr>
-                <td>/attendance GET</td>
+                <td>/stu/attendance GET</td>
                 <td>考勤情况</td>
                 <td></td>
-                <td>{"status": true, "attendance": ["date": "2019/12/01","cname": "Web技术开发", "type": 1]}</td>
-                <td>1:请假，2:旷课</td>
+                <td>[{"number":"3117005390","name":"吴海锋","date":"2019-09-20","cname":"大学英语","type":1}]</td>
+                <td>type：1请假、2旷课</td>
             </tr>
         </table>
-        <div class="alert alert-info text-center" role="alert"><h5>status用于判断服务器状态是否正常</h5></div>
+        <div class="alert alert-info text-center" role="alert"><h5>返回响应为json格式</h5></div>
     </div>
 </div>
 </body>

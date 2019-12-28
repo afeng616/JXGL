@@ -22,7 +22,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .loginProcessingUrl("/login")
                 .and()
                 .authorizeRequests()  // 授权配置
-                .antMatchers("/webjars/**", "/css/**", "/", "/index**").permitAll()
+                .antMatchers("/webjars/**", "/css/**", "/", "/index**", "/user/**").permitAll()
                 .anyRequest()
                 .authenticated();
     }
