@@ -4,14 +4,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>主页</title>
-    <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/dashboard.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/flat-blue.css">
+
+    <title>修改密码</title>
+    <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootstrap.css">
     <script src="./bootstrap-3.3.7-dist/js/jquery.js"></script>
     <script src="./bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <link href="./css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/flat-blue.css">
+    <script>
+        function changeOnclick() {
 
+            var password = document.getElementById("input_password").value;
+            if(!(/^1[3456789]\d{9}$/.test(password))){
+                alert("密码不能为空");
+                return false;
+            }
+
+        }
+    </script>
     <style>
         .serviceThree{
             background-size: cover;
@@ -27,9 +38,9 @@
         }
     </style>
 </head>
-<body class="flat-blue ">
-<nav class="navbar navbar-inverse navbar-fixed-top" >
-    <div class="container-fluid ">
+<body class="flat-blue">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                 <span class="sr-only">Toggle navigation</span>
@@ -42,7 +53,6 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="login.html">退出登陆</a></li>
-
             </ul>
         </div>
     </div>
@@ -56,31 +66,36 @@
                 <div class="side-menu sidebar-inverse">
                     <nav class="navbar navbar-default" role="navigation">
                         <div class="side-menu-container">
-                            <div class="navbar-header serviceThree">
-                                <a class="navbar-brand" href="index.html">
-                                    <span class="glyphicon glyphicon-home" style="padding-left: 30%"></span><span class="title" style="padding-left: 10%">主页</span>
-                                </a>
-                            </div>
                             <ul class="nav navbar-nav">
                                 <li>
-                                    <a  href="teacher_Info.html">
+                                    <a href="index.html">
                                         <div class="serviceThree">
-                                            <span class="glyphicon glyphicon-user" style="padding-left: 30%"></span>
-                                            <span class="title"  style="padding-left: 10%">个人信息</span>
+                                            <span class="glyphicon glyphicon-home" style="padding-left: 30%"></span>
+                                            <span class="title" style="padding-left: 10%">主页</span>
                                         </div>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="teacher_schedule.html">
+                                    <div class="navbar-header serviceThree">
+                                        <a class="navbar-brand" href="index.html">
+                                            <span class="glyphicon glyphicon-user" style="padding-left: 30%"></span>
+                                            <span class="title"  style="padding-left: 10%">个人信息</span>
+                                        </a>
+
+                                    </div>
+
+                                </li>
+                                <li>
+                                    <a href="schedule.html">
                                         <div class="serviceThree">
                                             <span class="glyphicon glyphicon-list-alt" style="padding-left: 30%"></span>
-                                            <span class="title" style="padding-left: 10%">上课任务</span>
+                                            <span class="title" style="padding-left: 10%">上课计划</span>
                                         </div>
 
                                     </a>
                                 </li>
                                 <li>
-                                    <a  href="examination_Arrangements.html">
+                                    <a  href="exam_Time.html">
                                         <div class="serviceThree">
                                             <span class="glyphicon glyphicon-calendar" style="padding-left: 30%"></span>
                                             <span class="title" style="padding-left: 10%">考试安排</span>
@@ -89,20 +104,30 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="teacher_Score.html">
+                                    <a href="exam_Score.html">
                                         <div class="serviceThree">
                                             <span class="glyphicon glyphicon-education" style="padding-left: 30%"></span>
-                                            <span class="title" style="padding-left: 10%">成绩管理</span>
+                                            <span class="title" style="padding-left: 10%">考试成绩</span>
+                                        </div>
+
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="warning.html">
+                                        <div class="serviceThree">
+                                            <span class="glyphicon glyphicon-alert" style="padding-left: 30%"></span>
+                                            <span class="title" style="padding-left: 10%">学业预警</span>
                                         </div>
 
                                     </a>
                                 </li>
                                 <li >
-                                    <a href="teacher_checkWork.html">
+                                    <a href="check_Work.html">
                                         <div class="serviceThree">
                                             <span class="glyphicon glyphicon-edit" style="padding-left: 30%"></span>
                                             <span class="title" style="padding-left: 10%">考勤情况</span>
                                         </div>
+
                                     </a>
                                 </li>
                             </ul>
@@ -113,65 +138,39 @@
         </div>
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <div class="row ">
+            <div class="row">
                 <div class="jumbotron Background1">
-                    <h2>教学后台管理系统 <span class="label label-default">功能介绍</span></h2>
-                    <br>
-                    <p>欢迎XXX登陆！</p>
+                    <h2>修改信息界面</h2>
+                    <p>这里可以修改用户信息</p>
+                    <p><a class="btn btn-primary btn-lg" href="index.html" role="button">返回主页</a></p>
+                    <p><a class="btn btn-primary btn-lg" href="myInfo.html" role="button">返回个人信息页</a></p>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <!--表单头在这-->
+                    <!--我的信息展示是有些信息不能修改，有些信息可以修改，所以展示时不可修改的信息放在<p>这-->
+                    <!--name属性都没写-->
+                    <form class="form-horizontal" action="update_userServlet">
 
-            <div class="container">
+                        <div class="form-group">
+                            <label for="input_password" class="col-sm-2 control-label">密码</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="input_password" style="width: 550px" value="" maxlength="15" placeholder="请输入密码">
+                            </div>
+                        </div>
 
-                <div class="row">
-                    <div class="col-lg-4">
-                        <a href="teacher_Info.html">
-                            <img class="img-circle" src="./img/person.png" alt="Generic placeholder image" width="140px" height="140px">
-                        </a>
-                        <h2>个人信息</h2>
-                        <p>查看教师信息，修改教师信息</p>
-                    </div><!-- /.col-lg-4 -->
-                    <div class="col-lg-4">
-                        <a href="teacher_schedule.html">
-                            <img class="img-circle" src="./img/course.png" alt="Generic placeholder image" width="140px" height="140px">
-                        </a>
-                        <h2>上课任务</h2>
-                        <p>查看老师的课程安排和课程信息</p>
-                    </div><!-- /.col-lg-4 -->
-                    <div class="col-lg-4">
-                        <a href="examination_Arrangements.html">
-                            <img class="img-circle" src="./img/test.png" alt="Generic placeholder image" width="140px" height="140px">
-                        </a>
-                        <h2>考试安排</h2>
-                        <p>教师安排考试时间和地点</p>
-                    </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-10" style="text-align:center">
+                                <button type="button" class="btn btn-primary btn-lg" onclick="changeOnclick()">修改</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-
-                <br>
-
-                <div class="row">
-                    <div class="col-lg-4">
-                        <a href="teacher_Score.html">
-                            <img class="img-circle" src="./img/score.png" alt="Generic placeholder image" width="140px" height="140px">
-                        </a>
-                        <h2>成绩管理</h2>
-                        <p>查看管理学生的成绩</p>
-                    </div><!-- /.col-lg-4 -->
-                    <div class="col-lg-4">
-                        <a href="teacher_checkWork.html">
-                            <img class="img-circle" src="./img/check.png" alt="Generic placeholder image" width="140px" height="140px">
-                        </a>
-                        <h2>考勤情况</h2>
-                        <p>统计学生的考勤情况</p>
-                    </div>
-                </div>
-
-
             </div>
         </div>
     </div>
 </div>
-
 </body>
 </html>
-

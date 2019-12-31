@@ -12,4 +12,14 @@ public class QuickStartController {
     public String start() {
         return "hello SpringBoot";
     }
+
+    @RequestMapping("/stu")
+    public String stu() {
+        return "/stu/index.html";
+    }
+
+    @RequestMapping("/tch")
+    public String tch() {
+        return "/tch/index.html";
+    }
 }

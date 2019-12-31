@@ -21,6 +21,5 @@ public class MyBatisTest {
 
     @Test
     public void test() {
-        System.out.println(userMapper.queryUserList());
     }
 }

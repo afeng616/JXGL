@@ -13,12 +13,9 @@ import java.util.List;
  */
 
 public interface StuMapper {
-    @Select("select * from tb_user")
-    List<User> queryUserList();
-
-    // 登录检索
-    @Select("select count(*) from tb_user where id=#{id} and password=#{password}")
-    boolean login(String id, String password);
+    // 用户查找
+    @Select("select * from tb_stuuser where id=#{id}")
+    User queryUser(String id);
 
     // 查看个人信息
     @Select("select * from tb_stuinfo where number = #{id}")

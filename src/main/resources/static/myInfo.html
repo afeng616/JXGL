@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>我的信息</title>
+    <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootstrap.css">
+    <script src="./bootstrap-3.3.7-dist/js/jquery.js"></script>
+    <script src="./bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <link href="./css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/flat-blue.css">
+<!--    <script>-->
+<!--        function changeOnclick() {-->
+<!--            var Age = document.getElementById("input_age").value;-->
+<!--            var Phone = document.getElementById("input_phone").value;-->
+<!--            var password = document.getElementById("input_password").value;-->
+<!--            if(!(/^1[3456789]\d{9}$/.test(Phone)) && !(/^(?:[1-9][0-9]?|1[01][0-9]|120)$/.test(Age))){-->
+<!--                alert("手机号码和年龄有误，请重填");-->
+<!--                return false;-->
+<!--            }-->
+<!--            if(!(/^1[3456789]\d{9}$/.test(Phone))){-->
+<!--                alert("手机号码有误，请重填");-->
+<!--                return false;-->
+<!--            }-->
+<!--            if(!(/^(?:[1-9][0-9]?|1[01][0-9]|120)$/.test(Age))){-->
+<!--                alert("年龄有误，请重填");-->
+<!--                return false;-->
+<!--            }-->
+<!--            if(!(/^1[3456789]\d{9}$/.test(password))){-->
+<!--                alert("密码不能为空");-->
+<!--                return false;-->
+<!--            }-->
+
+<!--        }-->
+<!--    </script>-->
+    <script type="text/javascript" src="2.2.4/jquery-2.2.4.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            getData();
+        });
+
+        function getData(){
+            var number =getCookie("number");
+            var name = getCookie("name");
+            var sex = getCookie("sex");
+            var profession = getCookie("profession");
+            var classnum = getCookie("classnum");
+            var college = getCookie("college");
+            var status = getCookie("status");
+            if (number!=="" || name!=="" || sex!=="" || profession!=="" || classnum!=="" || college!=="" || status!=="")
+            {
+                $("#number").text(number);
+                $("#name").text(name);
+                $("#sex").text(sex);
+                $("#profession").text(profession);
+                $("#classnum").text(classnum);
+                $("#college").text(college);
+                $("#status").text(status);
+            }
+
+        }
+
+        //循环得到相应的值
+        function getCookie(cname)
+        {
+            var ss = document.cookie;
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0; i<ca.length; i++)
+            {
+                var c = ca[i].trim();
+                if (c.indexOf(name)===0)
+                    return c.substring(name.length,c.length);
+            }
+            return "";
+        }
+    </script>
+    <style>
+        .serviceThree{
+            background-size: cover;
+            position: relative;
+            transition: all 0.6s;
+            overflow: hidden;
+        }
+        .serviceThree:hover{
+            transform: scale(1.2);
+        }
+        .Background1{
+            background: url("./img/1.jpg");
+        }
+    </style>
+</head>
+<body class="flat-blue">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">教学管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="login.html">退出登陆</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid" style="padding-top: 2.6%">
+    <div class="row">
+        <div class="app-container" >
+            <div class="row content-container" >
+                <div class="side-menu sidebar-inverse">
+                    <nav class="navbar navbar-default" role="navigation">
+                        <div class="side-menu-container">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <a href="index.html">
+                                        <div class="serviceThree">
+                                            <span class="glyphicon glyphicon-home" style="padding-left: 30%"></span>
+                                            <span class="title" style="padding-left: 10%">主页</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="navbar-header serviceThree">
+                                        <a class="navbar-brand" href="index.html">
+                                            <span class="glyphicon glyphicon-user" style="padding-left: 30%"></span>
+                                            <span class="title"  style="padding-left: 10%">个人信息</span>
+                                        </a>
+
+                                    </div>
+<!--                                    <a href="myInfo.html">-->
+<!--                                        <div class="serviceThree">-->
+<!--                                            <span class="glyphicon glyphicon-user" style="padding-left: 30%"></span>-->
+<!--                                            <span class="title"  style="padding-left: 10%">个人信息</span>-->
+<!--                                        </div>-->
+<!--                                    </a>-->
+                                </li>
+                                <li>
+                                    <a href="schedule.html">
+                                        <div class="serviceThree">
+                                            <span class="glyphicon glyphicon-list-alt" style="padding-left: 30%"></span>
+                                            <span class="title" style="padding-left: 10%">上课计划</span>
+                                        </div>
+
+                                    </a>
+                                </li>
+                                <li>
+                                    <a  href="exam_Time.html">
+                                        <div class="serviceThree">
+                                            <span class="glyphicon glyphicon-calendar" style="padding-left: 30%"></span>
+                                            <span class="title" style="padding-left: 10%">考试安排</span>
+                                        </div>
+
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="exam_Score.html">
+                                        <div class="serviceThree">
+                                            <span class="glyphicon glyphicon-education" style="padding-left: 30%"></span>
+                                            <span class="title" style="padding-left: 10%">考试成绩</span>
+                                        </div>
+
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="warning.html">
+                                        <div class="serviceThree">
+                                            <span class="glyphicon glyphicon-alert" style="padding-left: 30%"></span>
+                                            <span class="title" style="padding-left: 10%">学业预警</span>
+                                        </div>
+
+                                    </a>
+                                </li>
+                                <li >
+                                    <a href="check_Work.html">
+                                        <div class="serviceThree">
+                                            <span class="glyphicon glyphicon-edit" style="padding-left: 30%"></span>
+                                            <span class="title" style="padding-left: 10%">考勤情况</span>
+                                        </div>
+
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="row">
+                <div class="jumbotron Background1">
+                    <h2>用户信息界面</h2>
+                    <p>这里可以查看和修改用户信息</p>
+                    <a class="btn btn-primary btn-lg" href="index.html" role="button">返回主页</a>
+                    <a class="btn btn-primary btn-lg" href="alterinfo.html" role="button">修改密码</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <!--表单头在这-->
+                    <!--我的信息展示是有些信息不能修改，有些信息可以修改，所以展示时不可修改的信息放在<p>这-->
+                    <!--name属性都没写-->
+                    <form class="form-horizontal" action="update_userServlet">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">学号</label>
+                            <div class="col-sm-10">
+                                <p id="number" class="form-control-static"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">姓名</label>
+                            <div class="col-sm-10">
+                                <p id="name" class="form-control-static"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">性别</label>
+                            <div class="col-sm-10">
+                                <p id="sex" class="form-control-static"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">专业</label>
+                            <div class="col-sm-10">
+                                <p id="profession" class="form-control-static"></p>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">班级</label>
+                            <div class="col-sm-10">
+                                <p id="classnum" class="form-control-static"> </p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">院系</label>
+                            <div class="col-sm-10">
+                                <p id="college" class="form-control-static"></p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">学籍情况</label>
+                            <div class="col-sm-10">
+                                <p id="status" class="form-control-static"></p>
+                            </div>
+                        </div>
+
+<!--                        <div class="form-group">-->
+<!--                            <div class="col-sm-10" style="text-align:center">-->
+<!--                                <button type="button" class="btn btn-primary btn-lg" onclick="changeOnclick()">修改</button>-->
+<!--                            </div>-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>考试安排</title>
+    <link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootstrap.css">
+    <script src="./bootstrap-3.3.7-dist/js/jquery.js"></script>
+    <script src="./bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <link href="./css/dashboard.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/flat-blue.css">
+    <style>
+        .serviceThree{
+            background-size: cover;
+            position: relative;
+            transition: all 0.6s;
+            overflow: hidden;
+        }
+        .serviceThree:hover{
+            transform: scale(1.2);
+        }
+        .Background1{
+            background: url("./img/1.jpg");
+        }
+    </style>
+    <script type="text/javascript" src="2.2.4/jquery-2.2.4.js"></script>
+    <script type="text/javascript">
+        function exam_time() {
+            var jsonobject = {};
+            var row = document.createElement('tr');
+            var tname = document.createElement('th');
+            var cname= document.createElement('td');
+            var esite= document.createElement('td');
+            var ebtime= document.createElement('td');
+            var eetime= document.createElement('td');
+            var etype= document.createElement('td');
+            var tbody = document.getElementById("tbody");
+
+            $.ajax({
+                type:"GET",
+                url:"localhost/stu/exam",
+                data:jsonobject,
+                dataType:"json",
+                timeout:5000,
+                success:function (jsonobject) {
+                    var obj = jsonobject.parseJSON();
+                    for (var i = 0; i < jsonobject.length; i++) {
+                        tname.innerHTML = jsonobject[i].tname;
+                        cname.innerHTML = jsonobject[i].cname;
+                        esite.innerHTML = jsonobject[i].esite;
+                        ebtime.innerHTML = jsonobject[i].ebtime;
+                        eetime.innerHTML = jsonobject[i].eetime;
+                        if (jsonobject[i].etype === 0){
+                            etype.innerHTML = "开卷";
+                        }else if(jsonobject[i].etype === 1){
+                            etype.innerHTML = "闭卷";
+                        }else if(jsonobject[i].etype === 2){
+                            etype.innerHTML = "机考";
+                        }
+                        row.appendChild(tname);
+                        row.appendChild(cname);
+                        row.appendChild(esite);
+                        row.appendChild(ebtime);
+                        row.appendChild(eetime);
+                        row.appendChild(etype);
+                        tbody.appendChild(row);
+                    }
+                },
+                error:function () {
+                    alert("暂无记录");
+                }
+            })
+        }
+
+        // function getCookie(cname)
+        // {
+        //     var ss = document.cookie;
+        //     var name = cname + "=";
+        //     var ca = document.cookie.split(';');
+        //     for(var i=0; i<ca.length; i++)
+        //     {
+        //         var c = ca[i].trim();
+        //         if (c.indexOf(name)===0)
+        //             return c.substring(name.length,c.length);
+        //     }
+        //     return "";
+        // }
+    </script>
+</head>
+<body class="flat-blue" onload="exam_time()">
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">教学管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="login.html">退出登陆</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container-fluid" style="padding-top: 2.6%">
+    <div class="row">
+        <div class="app-container" >
+            <div class="row content-container" >
+                <div class="side-menu sidebar-inverse">
+                    <nav class="navbar navbar-default" role="navigation">
+                        <div class="side-menu-container">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <a href="index.html">
+                                        <div class="serviceThree">
+                                            <span class="glyphicon glyphicon-home" style="padding-left: 30%"></span>
+                                            <span class="title" style="padding-left: 10%">主页</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="myInfo.html">
+                                        <div class="serviceThree">
+                                            <span class="glyphicon glyphicon-user" style="padding-left: 30%"></span>
+                                            <span class="title"  style="padding-left: 10%">个人信息</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="schedule.html">
+                                        <div class="serviceThree">
+                                            <span class="glyphicon glyphicon-list-alt" style="padding-left: 30%"></span>
+                                            <span class="title" style="padding-left: 10%">上课计划</span>
+                                        </div>
+
+                                    </a>
+                                </li>
+                                <li>
+                                    <div class="navbar-header serviceThree">
+                                        <a class="navbar-brand" href="exam_Time.html">
+                                            <span class="glyphicon glyphicon-calendar" style="padding-left: 30%"></span>
+                                            <span class="title" style="padding-left: 10%">考试安排</span>
+                                        </a>
+                                    </div>
+<!--                                    <a  href="exam_Time.html">-->
+<!--                                        <div class="serviceThree">-->
+<!--                                            <span class="glyphicon glyphicon-calendar" style="padding-left: 30%"></span>-->
+<!--                                            <span class="title" style="padding-left: 10%">考试安排</span>-->
+<!--                                        </div>-->
+
+<!--                                    </a>-->
+                                </li>
+                                <li>
+                                    <a href="exam_Score.html">
+                                        <div class="serviceThree">
+                                            <span class="glyphicon glyphicon-education" style="padding-left: 30%"></span>
+                                            <span class="title" style="padding-left: 10%">考试成绩</span>
+                                        </div>
+
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="warning.html">
+                                        <div class="serviceThree">
+                                            <span class="glyphicon glyphicon-alert" style="padding-left: 30%"></span>
+                                            <span class="title" style="padding-left: 10%">学业预警</span>
+                                        </div>
+
+                                    </a>
+                                </li>
+                                <li >
+                                    <a href="check_Work.html">
+                                        <div class="serviceThree">
+                                            <span class="glyphicon glyphicon-edit" style="padding-left: 30%"></span>
+                                            <span class="title" style="padding-left: 10%">考勤情况</span>
+                                        </div>
+
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+
+            <!--巨幕-->
+            <div class="row">
+                <div class="jumbotron Background1">
+                    <h2>考试安排</h2>
+                    <p>查看个人的考试安排</p>
+                    <p><a class="btn btn-primary btn-lg" href="index.html" role="button">返回主页</a></p>
+                </div>
+            </div>
+
+
+
+            <!--该页的功能-->
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">监考老师</th>
+                        <th scope="col">考试课程</th>
+                        <th scope="col">考试地点</th>
+                        <th scope="col">考试开始时间</th>
+                        <th scope="col">考试结束时间</th>
+                        <th scope="col">考试类型</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody">
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                        <td>@mdo</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

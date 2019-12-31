@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <title>登陆页面</title>
+    <meta charset="utf-8">
+    <script src="webjars/jquery/2.2.4/jquery.min.js"></script>
+    <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/style3.css">
+    <link rel="stylesheet" href="css/landing-2.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+<body data-spy="scroll" data-target="#pb-navbar" data-offset="200">
+<section class="pb_cover_v3 overflow-hidden cover-bg-indigo cover-bg-opacity text-left pb_gradient_v1 pb_slant-light"
+         id="section-home">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-6">
+                <h2 class="heading mb-3">欢迎访问</h2>
+                <h2 class="heading mb-3">教学管理系统</h2>
+                <div class="sub-heading">
+                    <p class="mb-5"><a class="btn btn-success btn-lg pb_btn-pill smoothscroll" href="index.html"><span
+                            class="pb_font-14 text-uppercase pb_letter-spacing-1">平台页面</span></a></p>
+                </div>
+            </div>
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-5 relative align-self-center">
+                <form action="./login" class="bg-white rounded pb_form_v1" method="post">
+                    <h1 class="mb-4 mt-0 text-center">请登录</h1>
+                    <div class="form-group">
+                        <input type="text" name="username" class="form-control pb_height-50 reverse" size="20px"
+                               placeholder="学号">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control pb_height-50 reverse" size="30px"
+                               placeholder="密码">
+                    </div>
+                    <div class="form-group">
+                        <div class="pb_select-wrap">
+                            <select name="mode" class="form-control pb_height-50 reverse">
+                                <option value="stu" selected>学生</option>
+                                <option value="tch">教师</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary btn-lg btn-block pb_btn-pill  btn-shadow-blue"
+                               size="30px" value="登录">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

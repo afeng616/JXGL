@@ -3,7 +3,6 @@ package team.afeng.jxgl.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import team.afeng.jxgl.entity.*;
@@ -19,15 +18,9 @@ import java.util.List;
  * Description: 参考 https://www.cnblogs.com/ityouknow/p/6037431.html
  */
 @Controller
-public class MyBatisController {
+public class StuController {
     @Autowired
     private StuMapper stuMapper;
-
-    @RequestMapping("query")
-    @ResponseBody
-    public List<User> queryUserList() {
-        return stuMapper.queryUserList();
-    }
 
     // 查看个人信息
     @RequestMapping("/stu/info")
@@ -35,13 +28,6 @@ public class MyBatisController {
     public StuInfo queryUserInfo(HttpServletRequest request) {
         String id = request.getUserPrincipal().getName();
         return stuMapper.queryUserInfo(id);
-    }
-
-    // 登录
-    @RequestMapping(value = "/user/login", method = RequestMethod.POST)
-    @ResponseBody
-    public boolean login(@RequestParam("id") String id, @RequestParam("password") String password) {
-        return stuMapper.login(id, password);
     }
 
     // 上课任务
@@ -83,7 +69,6 @@ public class MyBatisController {
         String id = request.getUserPrincipal().getName();
         return stuMapper.queryAttendance(id);
     }
-
 
 
 }
