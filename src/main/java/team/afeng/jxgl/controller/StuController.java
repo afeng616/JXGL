@@ -22,6 +22,23 @@ public class StuController {
     @Autowired
     private StuMapper stuMapper;
 
+    // 修改密码
+    @RequestMapping("/stu/pwd")
+    @ResponseBody
+    public boolean alterPwd(HttpServletRequest request, @RequestParam("pwd") String pwd) {
+        String id = request.getUserPrincipal().getName();
+        return stuMapper.alterPwd(id, pwd);
+    }
+
+    // 获取用户姓名
+    @RequestMapping("/stu/name")
+    @ResponseBody
+    public String queryUserName(HttpServletRequest request) {
+        String id = request.getUserPrincipal().getName();
+        return stuMapper.queryUserName(id);
+    }
+
+
     // 查看个人信息
     @RequestMapping("/stu/info")
     @ResponseBody

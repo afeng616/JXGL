@@ -1,6 +1,7 @@
 package team.afeng.jxgl.mapper;
 
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import team.afeng.jxgl.entity.*;
 
 import java.util.List;
@@ -13,9 +14,17 @@ import java.util.List;
  */
 
 public interface StuMapper {
+    // 修改密码
+    @Update("update tb_stuuser set password=#{pwd} where id=#{id}")
+    boolean alterPwd(String id, String pwd);
+
     // 用户查找
     @Select("select * from tb_stuuser where id=#{id}")
     User queryUser(String id);
+
+    // 获取用户姓名
+    @Select("select name from tb_stuinfo where number=#{id}")
+    String queryUserName(String id);
 
     // 查看个人信息
     @Select("select * from tb_stuinfo where number = #{id}")

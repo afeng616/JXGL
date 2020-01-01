@@ -1,0 +1,66 @@
+<script>
+    function warning() {
+        var $tbody = $('#tbody');
+        var number = null;
+        var name = null;
+        var semester = null;
+        var classnum = null;
+        var type = null;
+
+        $.ajax({
+            type: "GET",
+            url: "/stu/warn",
+            dataType: "json",
+            timeout: 5000,
+            success: function (jsonobject) {
+                for (var i = 0; i < jsonobject.length; i++) {
+                    number = jsonobject[i].number;
+                    name = jsonobject[i].name;
+                    semester = jsonobject[i].semester;
+                    classnum = jsonobject[i].classnum;
+                    if (jsonobject[i].type === 1) {
+                        type = "一般预警";
+                    } else if (jsonobject[i].type === 2) {
+                        type = "严重预警";
+                    }
+                    var content = '<tr><td>' + number + '</td><td>' + name + '</td><td>' + semester + '</td>' +
+                        '<td>' + classnum + '</td><td>' + type + '</td></tr>';
+                    $tbody.append(content);
+                }
+            },
+            error: function () {
+                console.log("暂无记录");
+            }
+        })
+    }
+
+</script>
+<!--巨幕-->
+<div class="row">
+    <div class="jumbotron Background1">
+        <h2>学业预警</h2>
+        <p>查看个人的学业预警</p>
+        <p><a class="btn btn-primary btn-lg" href="index.html" role="button">返回主页</a></p>
+    </div>
+</div>
+
+
+<!--该页的功能-->
+<div class="card-body">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">班级</th>
+            <th scope="col">学号</th>
+            <th scope="col">姓名</th>
+            <th scope="col">学期</th>
+            <th scope="col">预警信息</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+    </table>
+</div>
+<script>
+    warning();
+</script>

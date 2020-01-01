@@ -37,12 +37,9 @@ public class MyUserDetailService implements UserDetailsService {
         team.afeng.jxgl.entity.User user = null;
         if (id.contains("t")) {
             user = tchMapper.queryUser(id);
-            System.out.println("教师");
         } else {
             user = stuMapper.queryUser(id);
-            System.out.println("学生");
         }
-        System.out.println(user);
 
         return new User(user.getId(), passwordEncoder.encode(user.getPassword()), AuthorityUtils.commaSeparatedStringToAuthorityList(id));
     }

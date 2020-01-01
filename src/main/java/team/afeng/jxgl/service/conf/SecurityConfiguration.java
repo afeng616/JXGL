@@ -32,12 +32,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .loginPage("/login.html")
                 .loginProcessingUrl("/login")
                 .successHandler(authenticationHandler)
+                .failureHandler(authenticationHandler)
                 .and()
                 .authorizeRequests()  // 授权配置
-                .antMatchers("/detail**", "/login**",
-                        "/", "/index**", "/user**").permitAll()
-//                .anyRequest()
-//                .authenticated()
+                .antMatchers("/login**").permitAll()
+                .anyRequest()
+                .authenticated()
                 .and()
                 .logout().logoutUrl("/logout").deleteCookies("JSESSIONID").permitAll()
                 .and().csrf().disable();

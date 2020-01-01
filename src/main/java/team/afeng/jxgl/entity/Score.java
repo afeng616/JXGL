@@ -9,19 +9,17 @@ package team.afeng.jxgl.entity;
 public class Score {
     private String tname;
     private String cname;
+    private String name;
     private int chours;
     private int ccredit;
     private int cscore;
 
-    @Override
-    public String toString() {
-        return "Score{" +
-                "tname='" + tname + '\'' +
-                ", cname='" + cname + '\'' +
-                ", chours=" + chours +
-                ", ccredit=" + ccredit +
-                ", cscore=" + cscore +
-                '}';
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getTname() {

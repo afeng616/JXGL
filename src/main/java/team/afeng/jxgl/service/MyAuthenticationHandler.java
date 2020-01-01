@@ -1,8 +1,10 @@
 package team.afeng.jxgl.service;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
@@ -14,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * Author: Afeng
@@ -22,13 +25,9 @@ import java.io.IOException;
  * Description:
  */
 @Component
-public class MyAuthenticationHandler implements AuthenticationSuccessHandler {
+public class MyAuthenticationHandler implements AuthenticationSuccessHandler, AuthenticationFailureHandler {
     private RequestCache requestCache = new HttpSessionRequestCache();
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
-
-    @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authentication) throws IOException, ServletException {
-    }
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
@@ -40,5 +39,13 @@ public class MyAuthenticationHandler implements AuthenticationSuccessHandler {
         else
             url = String.format(url, "stu");
         redirectStrategy.sendRedirect(request, response, url);
+    }
+
+    @Override
+    public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
+        httpServletResponse.setContentType("application/json;charset=utf-8");
+        PrintWriter writer = httpServletResponse.getWriter();
+        writer.write("{\"msg\":\"账号或密码错误！\"}");
+        writer.close();
     }
 }

@@ -75,10 +75,10 @@
       .flat-blue .navbar.navbar-inverse .navbar-nav > li > a {
         color: #FFF; }
     .flat-blue .navbar.navbar-inverse .navbar-nav > li:hover > a {
-      color: #22A7F0; }
+      color: #353d47; }
     .flat-blue .navbar.navbar-inverse .navbar-nav > li.open > a {
       background-color: transparent;
-      color: #22A7F0; }
+      color: #353d47; }
     .flat-blue .navbar.navbar-inverse .navbar-nav > li.danger > a {
       background-color: transparent;
       border-bottom: 4px solid #FA2A00;
@@ -167,7 +167,7 @@
     .flat-blue .navbar.navbar-inverse .navbar-nav > li {
       border-left: 0; }
     .flat-blue .navbar.navbar-inverse .navbar-right {
-      background-color: #353d47; } }
+      background-color: #22A7F0; } }
   .flat-blue .card.red {
     background-color: #FA2A00;
     color: #FFF; }
@@ -649,7 +649,7 @@
   color: #353d47; }
 
 .flat-blue.landing-page .navbar.affix .navbar-nav > li:hover > a {
-  color: #22A7F0; }
+  color: #353d47; }
 
 @media (max-width: 768px) {
   .flat-blue.landing-page .navbar .navbar-collapse {
