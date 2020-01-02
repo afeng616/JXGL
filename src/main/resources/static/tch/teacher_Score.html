@@ -4,8 +4,9 @@
             $('#main').html(data);
         });
     }
-    function onSubmit() {
-
+    function onSubmit(obj) {
+        console.log($(obj).val());
+        console.log($(obj).parent('tr').children(''));
     }
 
     function teacher_Score() {
@@ -32,8 +33,8 @@
                     ccredit = jsonobject[i].ccredit;
                     cscore = jsonobject[i].cscore;
                     cid = jsonobject[i].cid;
-                    var content = '<tr><td>' + cid + '</td><td>' + cname + '</td><td>' + tname + '</td><td>' + name + '</td>' +
-                        '<td>' + chours + '</td><td>'+ ccredit + '</td><td>'+ '</td><td><input style="width: 20%; position: relative;left: -35%;" onblur="onSubmit()" value="' + cscore + '"></td></tr>';
+                    var content = '<tr><td>' + cid + '</td><td>' + cname + '</td><td class="tname">' + tname + '</td><td>' + name + '</td>' +
+                        '<td>' + chours + '</td><td>'+ ccredit + '</td><td>'+ '</td><td><input style="width: 20%; position: relative;left: -35%;" onblur="onSubmit(this)" value="' + cscore + '"></td></tr>';
                     $tbody.append(content);
                 }
             },

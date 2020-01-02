@@ -7,33 +7,38 @@
 
     function score_detail() {
         var $tbody = $('#tbody');
-        var tname = null;
+        var cid = null;
         var cname = null;
-        var chours = null;
-        var ccredit = null;
-        var cscore = null;
+        var tname = null;
+        var failed = [];
 
         $.ajax({
             type: "GET",
-            url: "/tch/nscore",
+            async: false,
+            url: "/tch/failed",
             dataType: "json",
             timeout: 5000,
             success: function (jsonobject) {
                 for (var i = 0; i < jsonobject.length; i++) {
-                    tname = jsonobject[i].tname;
-                    cname = jsonobject[i].cname;
-                    chours = jsonobject[i].chours;
-                    ccredit = jsonobject[i].ccredit;
-                    cscore = jsonobject[i].cscore;
-                    var content = '<tr><td>' + tname + '</td><td>' + cname + '</td><td>' + chours + '</td>' +
-                        '<td>' + ccredit + '</td><td>' + cscore + '</td></tr>';
-                    $tbody.append(content);
+                    failed[i] = jsonobject[0];
                 }
             },
             error: function () {
                 console.log("暂无记录");
             }
-        })
+        });
+        $.get('/tch/statistics', function (data) {
+            for (var i = 0; i < data.length; i++) {
+                cid = data[i].cid;
+                cname = data[i].cname;
+                tname = data[i].tname;
+
+                var content = '<tr><td>' + cid + '</td><td>' + cname + '</td><td>' + tname + '</td>' +
+                    '<td>' + failed[i] + '</td></tr>';
+                $('#tbody').append(content);
+            }
+
+        });
     }
 </script>
 <div class="row">

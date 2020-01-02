@@ -12,7 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import team.afeng.jxgl.mapper.StuMapper;
 import team.afeng.jxgl.mapper.TchMapper;
-// FIXME: 任意端登录后，若未注销仍可访问其它端
 /**
  * Author: Afeng
  * Date: 2019/12/27

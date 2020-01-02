@@ -10,7 +10,6 @@ public class Statistics {
     private String cid;
     private String cname;
     private String tname;
-    private int failed;
 
     public String getCid() {
         return cid;
@@ -34,13 +33,5 @@ public class Statistics {
 
     public void setTname(String tname) {
         this.tname = tname;
-    }
-
-    public int getFailed() {
-        return failed;
-    }
-
-    public void setFailed(int failed) {
-        this.failed = failed;
     }
 }

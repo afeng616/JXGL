@@ -53,16 +53,18 @@ public interface TchMapper {
             "where tb_score.tid = #{tid} or tb_score.tid is null")
     List<Score> queryScore(String tid);
 
-    // 成绩统计
-    @Select("")
-    Statistics queryStatistics(String tid);
+    // 成绩统计部分信息
+    @Select("select cid, cname, tname from tb_teacher " +
+            "inner join tb_course on tb_course.cid=any(select cid from tb_teach where tid=#{tid}) " +
+            "where tid=#{tid}")
+    List<Statistics> queryStatistics(String tid);
 
     // 不及格人数
     @Select("select count(number) from tb_stuinfo " +
             "left outer join tb_score on tb_score.id=tb_stuinfo.number " +
             "and (tb_score.cid=any(select cid from tb_teach where tid=#{tid}) or tb_score.cid is null) " +
             "where cscore<60 or cscore is null;")
-    int queryFailed(String tid);
+    int[] queryFailed(String tid);
 
     // 考勤情况
     @Select("SELECT number, name, date, cname, type FROM `tb_attendance` " +

@@ -14,8 +14,6 @@
     <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         function jumpto(url, obj) {
-            console.log($('.navbar-header.serviceThree'));
-            // console.log($(obj).parent('li').hasClass('navbar-header'));
             $.get(url, function (data) {
                 $('#main').html(data);
             });

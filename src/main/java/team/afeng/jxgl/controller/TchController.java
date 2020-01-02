@@ -1,5 +1,6 @@
 package team.afeng.jxgl.controller;
 
+import com.mysql.cj.PreparedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,6 +45,22 @@ public class TchController {
     public TchInfo queryInfo(HttpServletRequest request) {
         String id = request.getUserPrincipal().getName();
         return tchMapper.queryInfo(id);
+    }
+
+    // 不及格人数
+    @RequestMapping("/tch/failed")
+    @ResponseBody
+    public int[] queryFailed(HttpServletRequest request) {
+        String tid = request.getUserPrincipal().getName();
+        return tchMapper.queryFailed(tid);
+    }
+
+    // 成绩统计部分信息
+    @RequestMapping("/tch/statistics")
+    @ResponseBody
+    public List<Statistics> queryStatistics(HttpServletRequest request) {
+        String tid = request.getUserPrincipal().getName();
+        return tchMapper.queryStatistics(tid);
     }
 
     // 查看课表
