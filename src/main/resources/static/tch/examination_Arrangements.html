@@ -1,0 +1,78 @@
+<script type="text/javascript">
+    function jump(url) {
+        $.get(url, function (data) {
+            $('#main').html(data);
+        });
+    }
+    function tch_examArr() {
+        var $tbody = $('#tbody');
+        var tname = null;
+        var cname = null;
+        var esite = null;
+        var ebtime = null;
+        var eetime = null;
+        var etype = null;
+
+        $.ajax({
+            type: "GET",
+            url: "/tch/exam",
+            dataType: "json",
+            timeout: 5000,
+            success: function (jsonobject) {
+                for (var i = 0; i < jsonobject.length; i++) {
+                    tname = jsonobject[i].tname;
+                    cname = jsonobject[i].cname;
+                    esite = jsonobject[i].esite;
+                    ebtime = jsonobject[i].ebtime;
+                    eetime = jsonobject[i].eetime;
+                    if (jsonobject[i].etype === 0) {
+                        etype = "开卷";
+                    } else if (jsonobject[i].etype === 1) {
+                        etype = "闭卷";
+                    } else if (jsonobject[i].etype === 2) {
+                        etype = "机考";
+                    }
+                    var content = "<tr><td>" + tname + "</td><td>" + cname + "</td><td>" + esite + "</td>" +
+                        "<td>" + ebtime + "</td><td>" + eetime + "</td><td>" + etype + "</td></tr>";
+                    $tbody.append(content);
+                }
+            },
+            error: function () {
+                console.log("暂无记录");
+            }
+        })
+    }
+</script>
+<!--巨幕-->
+<div class="row">
+    <div class="jumbotron Background1">
+        <h2>考试安排</h2>
+        <p>查看个人的考试安排</p>
+        <p>
+            <a class="btn btn-primary btn-lg" href="index.html" role="button">返回主页</a>
+            <a class="btn btn-primary btn-lg" onclick="jump('/tch/add_testTime.html')" role="button">添加考试</a>
+        </p>
+    </div>
+</div>
+
+
+<!--该页的功能-->
+<div class="card-body">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">监考老师</th>
+            <th scope="col">考试课程</th>
+            <th scope="col">考试地点</th>
+            <th scope="col">考试开始时间</th>
+            <th scope="col">考试结束时间</th>
+            <th scope="col">考试类型</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+    </table>
+</div>
+<script>
+    tch_examArr();
+</script>

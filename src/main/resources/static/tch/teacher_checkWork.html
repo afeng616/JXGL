@@ -1,0 +1,76 @@
+<script>
+    function jump(url) {
+        $.get(url, function (data) {
+            $('#main').html(data);
+        });
+    }
+
+    function tch_checkWork() {
+        var $tbody = $('#tbody');
+        var number = null;
+        var name = null;
+        var date = null;
+        var canme = null;
+        var type = null;
+
+        $.ajax({
+            type: "GET",
+            url: "/tch/attendance",
+            dataType: "json",
+            timeout: 5000,
+            success: function (jsonobject) {
+                for (var i = 0; i < jsonobject.length; i++) {
+                    number = jsonobject[i].number;
+                    name = jsonobject[i].name;
+                    date = jsonobject[i].date;
+                    canme = jsonobject[i].canme;
+                    if (jsonobject[i].type === 1) {
+                        type = "一般预警";
+                    } else if (jsonobject[i].type === 2) {
+                        type = "严重预警";
+                    }
+                    var content = '<tr><td>' + number + '</td><td>' + name + '</td><td>' + date + '</td>' +
+                        '<td>' + canme + '</td><td>' + type + '</td></tr>';
+                    $tbody.append(content);
+                }
+            },
+            error: function () {
+                console.log("暂无记录");
+            }
+        })
+    }
+
+</script>
+<!--巨幕-->
+<div class="row">
+    <div class="jumbotron Background1">
+        <h2>考勤情况</h2>
+        <p>查看个人的考勤情况</p>
+        <p>
+            <a class="btn btn-primary btn-lg" href="index.html" role="button">返回主页</a>
+<!--            <a class="btn btn-primary btn-lg" onclick="jump('/tch/add_checkWork.html')" role="button">返回主页</a>-->
+        </p>
+    </div>
+</div>
+
+
+<!--该页的功能-->
+<div class="card-body">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">学号</th>
+            <th scope="col">姓名</th>
+            <th scope="col">班级</th>
+            <th scope="col">时间</th>
+            <th scope="col">课程</th>
+            <th scope="col">缺勤原因</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+    </table>
+</div>
+<script>
+    tch_checkWork();
+</script>

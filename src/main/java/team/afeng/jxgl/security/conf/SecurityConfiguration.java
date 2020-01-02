@@ -1,4 +1,4 @@
-package team.afeng.jxgl.service.conf;
+package team.afeng.jxgl.security.conf;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import team.afeng.jxgl.service.MyAuthenticationHandler;
+import team.afeng.jxgl.security.MyAuthenticationHandler;
 
 /**
  * Author: Afeng
@@ -35,7 +35,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .failureHandler(authenticationHandler)
                 .and()
                 .authorizeRequests()  // 授权配置
-                .antMatchers("/login**").permitAll()
+                .antMatchers("/stu/**").hasAuthority("stu")
+                .antMatchers("/tch/**").hasAuthority("tch")
+                .antMatchers("/login**", "/who", "/count").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

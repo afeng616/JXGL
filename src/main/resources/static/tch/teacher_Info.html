@@ -1,0 +1,83 @@
+<script>
+    function jump(url) {
+        $.get(url, function (data) {
+            $('#main').html(data);
+        });
+    }
+
+    function myInfo() {
+        var tid = document.getElementById("tid");
+        var tname = document.getElementById("tname");
+        var sex = document.getElementById("sex");
+        var faculty = document.getElementById("faculty");
+
+        $.ajax({
+            type: "GET",
+            url: "/tch/info",
+            dataType: "json",
+            timeout: 5000,
+            success: function (jsonobject) {
+                tid.innerHTML = jsonobject.tid;
+                tname.innerHTML = jsonobject.tname;
+                sex.innerHTML = jsonobject.sex;
+                faculty.innerHTML = jsonobject.faculty;
+            },
+            error: function () {
+                console.log("暂无记录");
+            }
+        })
+    }
+</script>
+<div class="row">
+    <div class="jumbotron Background1">
+        <h2>用户信息界面</h2>
+        <p>这里可以查看和修改用户信息</p>
+        <a class="btn btn-primary btn-lg" href="index.html" role="button">返回主页</a>
+        <a class="btn btn-primary btn-lg" onclick="jump('teacher_alterinfo.html')" role="button">修改密码</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <!--表单头在这-->
+        <!--我的信息展示是有些信息不能修改，有些信息可以修改，所以展示时不可修改的信息放在<p>这-->
+        <!--name属性都没写-->
+        <form class="form-horizontal" action="update_userServlet">
+            <div class="form-group">
+                <label class="col-sm-2 control-label">教师编号</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" id="tid"></p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">教师姓名</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" id="tname"></p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">性别</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" id="sex"></p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-2 control-label">工作部门</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static" id="faculty"></p>
+                </div>
+            </div>
+
+
+            <!--                        <div class="form-group">-->
+            <!--                            <div class="col-sm-10" style="text-align:center">-->
+            <!--                                <button type="button" class="btn btn-primary btn-lg" onclick="changeOnclick()">修改</button>-->
+            <!--                            </div>-->
+
+        </form>
+    </div>
+</div>
+<script>
+    myInfo();
+</script>

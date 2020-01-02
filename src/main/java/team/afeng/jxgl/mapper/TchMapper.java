@@ -1,6 +1,9 @@
 package team.afeng.jxgl.mapper;
 
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import team.afeng.jxgl.entity.*;
 
 import java.util.List;
@@ -12,13 +15,21 @@ import java.util.List;
  * Description:
  */
 public interface TchMapper {
+    // 修改密码
+    @Update("update tb_tchuser set password=#{pwd} where id=#{id}")
+    boolean alterPwd(String id, String pwd);
+
+    // 获取姓名
+    @Select("select tname from tb_teacher where tid=#{tid}")
+    String queryUserName(String tid);
+
     // 用户查找
     @Select("select * from tb_tchuser where id=#{id}")
     User queryUser(String id);
 
     // 个人信息
-    @Select("select * from tb_teacher where id=#{id}")
-    TchInfo queryInfo(String id);
+    @Select("select * from tb_teacher where tid=#{tid}")
+    TchInfo queryInfo(String tid);
 
     // 上课任务
     @Select("select cname, tname, csite, content, ctime from tb_course " +
@@ -35,12 +46,23 @@ public interface TchMapper {
     List<Exam> queryExam(String tid);
 
     // 查看课程成绩
-    @Select("select tname, cname, name, chours, ccredit, cscore from tb_stuinfo " +
+    @Select("select tname, tb_course.cid, cname, name, chours, ccredit, cscore from tb_stuinfo " +
             "left outer join tb_score on tb_score.id=tb_stuinfo.number " +
             "inner join tb_teacher on tb_teacher.tid=#{tid} " +
             "inner join tb_course on tb_course.cid = any(select cid from tb_teach where tid='t001') " +
             "where tb_score.tid = #{tid} or tb_score.tid is null")
     List<Score> queryScore(String tid);
+
+    // 成绩统计
+    @Select("")
+    Statistics queryStatistics(String tid);
+
+    // 不及格人数
+    @Select("select count(number) from tb_stuinfo " +
+            "left outer join tb_score on tb_score.id=tb_stuinfo.number " +
+            "and (tb_score.cid=any(select cid from tb_teach where tid=#{tid}) or tb_score.cid is null) " +
+            "where cscore<60 or cscore is null;")
+    int queryFailed(String tid);
 
     // 考勤情况
     @Select("SELECT number, name, date, cname, type FROM `tb_attendance` " +

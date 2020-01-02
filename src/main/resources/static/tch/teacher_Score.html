@@ -1,0 +1,76 @@
+<script type="text/javascript">
+    function jump(url) {
+        $.get(url, function (data) {
+            $('#main').html(data);
+        });
+    }
+    function onSubmit() {
+
+    }
+
+    function teacher_Score() {
+        var $tbody = $('#tbody');
+        var tname = null;
+        var cname = null;
+        var chours = null;
+        var ccredit = null;
+        var cscore = null;
+        var name = null;
+        var cid = null;
+
+        $.ajax({
+            type: "GET",
+            url: "/tch/score",
+            dataType: "json",
+            timeout: 5000,
+            success: function (jsonobject) {
+                for (var i = 0; i < jsonobject.length; i++) {
+                    name = jsonobject[i].name;
+                    tname = jsonobject[i].tname;
+                    cname = jsonobject[i].cname;
+                    chours = jsonobject[i].chours;
+                    ccredit = jsonobject[i].ccredit;
+                    cscore = jsonobject[i].cscore;
+                    cid = jsonobject[i].cid;
+                    var content = '<tr><td>' + cid + '</td><td>' + cname + '</td><td>' + tname + '</td><td>' + name + '</td>' +
+                        '<td>' + chours + '</td><td>'+ ccredit + '</td><td>'+ '</td><td><input style="width: 20%; position: relative;left: -35%;" onblur="onSubmit()" value="' + cscore + '"></td></tr>';
+                    $tbody.append(content);
+                }
+            },
+            error: function () {
+                console.log("暂无记录");
+            }
+        })
+    }
+</script>
+<div class="row">
+    <div class="jumbotron Background1">
+        <h2>考试成绩 <span class="label label-default"></span></h2>
+        <p>查看个人考试成绩</p>
+        <p>
+            <a class="btn btn-primary btn-lg" href="index.html" role="button">返回主页</a>
+            <a class="btn btn-primary btn-lg" onclick="jump('/tch/score_detail.html')" role="button">成绩统计</a>
+        </p>
+    </div>
+</div>
+
+
+<!--该页的功能-->
+<div class="card-body">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">课程ID</th>
+            <th scope="col">课程名称</th>
+            <th scope="col">授课教师</th>
+            <th scope="col">学生姓名</th>
+            <th scope="col">学时</th>
+            <th scope="col">学分</th>
+            <th scope="col">课程成绩</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+    </table>
+</div>
+<script>teacher_Score();</script>

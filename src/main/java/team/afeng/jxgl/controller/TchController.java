@@ -22,6 +22,22 @@ public class TchController {
     @Autowired
     private TchMapper tchMapper;
 
+    // 修改密码
+    @RequestMapping("/tch/pwd")
+    @ResponseBody
+    public boolean alterPwd(HttpServletRequest request, @RequestParam("pwd") String pwd) {
+        String tid = request.getUserPrincipal().getName();
+        return tchMapper.alterPwd(tid, pwd);
+    }
+
+    // 查找姓名
+    @RequestMapping("/tch/name")
+    @ResponseBody
+    public String queryUserName(HttpServletRequest request) {
+        String tid = request.getUserPrincipal().getName();
+        return tchMapper.queryUserName(tid);
+    }
+
     // 查看个人信息
     @RequestMapping("/tch/info")
     @ResponseBody

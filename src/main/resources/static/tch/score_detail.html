@@ -1,0 +1,66 @@
+<script type="text/javascript">
+    function jump(url) {
+        $.get(url, function (data) {
+            $('#main').html(data);
+        });
+    }
+
+    function score_detail() {
+        var $tbody = $('#tbody');
+        var tname = null;
+        var cname = null;
+        var chours = null;
+        var ccredit = null;
+        var cscore = null;
+
+        $.ajax({
+            type: "GET",
+            url: "/tch/nscore",
+            dataType: "json",
+            timeout: 5000,
+            success: function (jsonobject) {
+                for (var i = 0; i < jsonobject.length; i++) {
+                    tname = jsonobject[i].tname;
+                    cname = jsonobject[i].cname;
+                    chours = jsonobject[i].chours;
+                    ccredit = jsonobject[i].ccredit;
+                    cscore = jsonobject[i].cscore;
+                    var content = '<tr><td>' + tname + '</td><td>' + cname + '</td><td>' + chours + '</td>' +
+                        '<td>' + ccredit + '</td><td>' + cscore + '</td></tr>';
+                    $tbody.append(content);
+                }
+            },
+            error: function () {
+                console.log("暂无记录");
+            }
+        })
+    }
+</script>
+<div class="row">
+    <div class="jumbotron Background1">
+        <h2>考试成绩 <span class="label label-default"></span></h2>
+        <p>查看个人考试成绩</p>
+        <p>
+            <a class="btn btn-primary btn-lg" href="index.html" role="button">返回主页</a>
+            <a class="btn btn-primary btn-lg" onclick="jump('/tch/teacher_Score.html')" role="button">返回成绩管理</a>
+        </p>
+    </div>
+</div>
+
+
+<!--该页的功能-->
+<div class="card-body">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">课程编号</th>
+            <th scope="col">课程名称</th>
+            <th scope="col">授课教师</th>
+            <th scope="col">不及格人数</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        </tbody>
+    </table>
+</div>
+<script>score_detail();</script>

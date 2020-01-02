@@ -1,0 +1,95 @@
+<script type="text/javascript">
+
+    function jump(url) {
+        $.get(url, function (data) {
+            $('#main').html(data);
+        });
+    }
+
+    function add_checkWork() {
+        var $tbody = $('#tbody');
+        var stuId = $('#stuId');
+        var stuName = $('#stuName');
+        var stuCourse = $('#stuCourse');
+        var stuTime = $('#stuTime');
+        var stuCause = $('#stuCause');
+        var jsonobject = {"stuId":stuId,"stuName":stuName,"stuCourse":stuCourse,"stuTime":stuTime,
+                        "stuCause":stuCause}
+
+        $.ajax({
+            type: "POST",
+            url: "/tch/add_checkWork",
+            data:jsonobject,
+            dataType: "json",
+            timeout: 5000,
+            success: function () {
+                alert("提交成功");
+            },
+            error: function () {
+                console.log("暂无记录");
+            }
+        })
+    }
+</script>
+<div class="row">
+    <div class="jumbotron Background1">
+        <h2>考勤情况</h2>
+        <p>查看个人的考勤情况</p>
+        <p>
+            <a class="btn btn-primary btn-lg" href="index.html" role="button">返回主页</a>
+            <a class="btn btn-primary btn-lg" onclick="jump('/tch/teacher_checkWork.html')" role="button">返回考勤情况</a></p>
+    </div>
+</div>
+
+
+<!--该页的功能-->
+<div class="row">
+    <div class="col-md-12 col-md-offset-2">
+        <form class="form-horizontal" action="update_userServlet">
+            <div class="form-group">
+                <label id="stuId" class="col-sm-2 control-label">学生学号</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">
+                        <input class="form-control" style="width: 30%">
+                    </p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label id="stuName" class="col-sm-2 control-label">缺勤学生</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">
+                        <input class="form-control" style="width: 30%">
+                    </p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label id="stuCourse" class="col-sm-2 control-label">缺勤课程</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">
+                        <input class="form-control" style="width: 30%">
+                    </p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label id="stuTime" class="col-sm-2 control-label">缺勤时间</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">
+                        <input class="form-control" style="width: 30%">
+                    </p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label id="stuCause" class="col-sm-2 control-label">缺勤原因</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static">
+                        <input class="form-control" style="width: 30%">
+                    </p>
+                </div>
+            </div>
+        </form>
+    </div>
+    <p class="text-center">
+        <button type="button" onclick="add_checkWork()" class="btn btn-primary btn-lg">提交</button>
+    </p>
+</div>
+<script></script>

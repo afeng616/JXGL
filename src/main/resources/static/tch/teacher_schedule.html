@@ -1,0 +1,139 @@
+<script>
+    function refresh() {
+        var options = $("#week option:selected");
+        var week = options.val();
+        document.getElementById("weekNumber").innerHTML = "第" + week + "周";
+        $.ajax({
+            type: "GET",
+            url: "" + "/tch/course",
+            data: {"week": week},
+            dataType: "json",
+            timeout: 5000,
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var ctime = data[i].ctime;
+                    var sceduleTime = document.getElementById("t" + ctime);
+                    sceduleTime.innerHTML = data[i].cname + '<br>' + data[i].csite;
+                }
+            },
+            error: function () {
+                console.log(week + "暂无消息");
+            }
+        })
+    }
+</script>
+<div class="row">
+    <div class="jumbotron Background1">
+        <h2>上课计划 <span class="label label-default">课程表</span></h2>
+        <br>
+        <!--下拉表单，选择查看第几周的课程表-->
+        <div class="dropdown">
+            <p>查看个人的课程表</p>
+            <select id="week" onchange="refresh()">
+                <option value="1">第一周</option>
+                <option value="2">第二周</option>
+                <option value="3">第三周</option>
+                <option value="4">第四周</option>
+                <option value="5">第五周</option>
+                <option value="6">第六周</option>
+                <option value="7">第七周</option>
+                <option value="8">第八周</option>
+                <option value="9">第九周</option>
+                <option value="10">第十周</option>
+                <option value="11">第十一周</option>
+                <option value="12">第十二周</option>
+                <option value="13">第十三周</option>
+                <option value="14">第十四周</option>
+                <option value="15">第十五周</option>
+                <option value="16">第十六周</option>
+                <option value="17">第十七周</option>
+                <option value="18">第十八周</option>
+                <option value="19">第十九周</option>
+                <option value="20">第二十周</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<!--该页的功能-->
+<div class="row" id="schedule">
+    <table class="table table-hover text-center">
+        <tr class="active">
+            <td class="danger" id="weekNumber">第N周</td>
+            <td class="danger">星期一</td>
+            <td class="danger">星期二</td>
+            <td class="danger">星期三</td>
+            <td class="danger">星期四</td>
+            <td class="danger">星期五</td>
+            <td class="danger">星期六</td>
+            <td class="danger">星期日</td>
+        <tr>
+            <td class="warning text-center">第一节</td>
+            <td class="success " id="t11"></td>
+            <td class="info" id="t21"></td>
+            <td class="warning" id="t31"></td>
+            <td class="danger" id="t41"></td>
+            <td class="info" id="t51"></td>
+            <td class="warning" id="t61"></td>
+            <td class="success" id="t71"></td>
+        </tr>
+
+        <tr>
+            <td class="warning text-center">第二节</td>
+            <td class="success" id="t12"></td>
+            <td class="info" id="t22"></td>
+            <td class="warning" id="t32"></td>
+            <td class="danger" id="t42"></td>
+            <td class="info" id="t52"></td>
+            <td class="warning" id="t62"></td>
+            <td class="success" id="t72"></td>
+        </tr>
+
+        <tr>
+            <td class="warning text-center">第三节</td>
+            <td class="success" id="t13"></td>
+            <td class="info" id="t23"></td>
+            <td class="warning" id="t33"></td>
+            <td class="danger" id="t43"></td>
+            <td class="info" id="t53"></td>
+            <td class="warning" id="t63"></td>
+            <td class="success" id="t73"></td>
+        </tr>
+
+        <tr>
+            <td class="warning text-center">第四节</td>
+            <td class="success" id="t14"></td>
+            <td class="info" id="t24"></td>
+            <td class="warning" id="t34"></td>
+            <td class="danger" id="t44"></td>
+            <td class="info" id="t54"></td>
+            <td class="warning" id="t64"></td>
+            <td class="success" id="t74"></td>
+        </tr>
+
+        <tr>
+            <td class="warning text-center">第五节</td>
+            <td class="success" id="t15"></td>
+            <td class="info" id="t25"></td>
+            <td class="warning" id="t35"></td>
+            <td class="danger" id="t45"></td>
+            <td class="info" id="t55"></td>
+            <td class="warning" id="t65"></td>
+            <td class="success" id="t75"></td>
+        </tr>
+
+        <tr>
+            <td class="warning text-center">第六节</td>
+            <td class="success" id="t16"></td>
+            <td class="info" id="t26"></td>
+            <td class="warning" id="t36"></td>
+            <td class="danger" id="t46"></td>
+            <td class="info" id="t56"></td>
+            <td class="warning" id="t66"></td>
+            <td class="success" id="t76"></td>
+        </tr>
+    </table>
+</div>
+<script>
+    refresh();
+</script>

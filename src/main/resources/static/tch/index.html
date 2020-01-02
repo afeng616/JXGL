@@ -3,20 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>主页</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>教师端</title>
     <link rel="stylesheet" href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="/webjars/jquery/2.2.4/jquery.min.js"></script>
     <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/flat-blue.css">
+    <script src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        function jumpto(url, obj) {
+            console.log($('.navbar-header.serviceThree'));
+            // console.log($(obj).parent('li').hasClass('navbar-header'));
+            $.get(url, function (data) {
+                $('#main').html(data);
+            });
+            $('.navbar-header.serviceThree').removeClass('navbar-header serviceThree');
+            $(obj).parent('li').addClass('navbar-header serviceThree');
+        }
+
+        $(function () {
+            $.get('/tch/name', function (name) {
+                $('#name').html('欢迎 ' + name + ' 老师登录！');
+            })
+        });
+
+        function done(num) {
+            $('.' + num).click();
+        }
+    </script>
+    <style>
+        .serviceThree {
+            background-size: cover;
+            position: relative;
+            transition: all 0.6s;
+            overflow: hidden;
+        }
+
+        .serviceThree:hover {
+            transform: scale(1.2);
+            color: #000000;
+        }
+
+        .Background1 {
+            background: url("../img/1.jpg");
+        }
+    </style>
 </head>
-<body>
-<div class="alert alert-success text-center" role="alert">
-    <h2>欢迎访问</h2>
-    <p>教师端</p>
-    <div>
-        <form action="/logout" method="post">
-            <button class="btn" type="submit">注销</button>
-        </form>
+<body class="flat-blue ">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid ">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">教学管理系统</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout">退出登录</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid" style="padding-top: 2.6%">
+    <div class="row">
+        <div class="app-container">
+            <div class="row content-container">
+                <div class="side-menu sidebar-inverse">
+                    <nav class="navbar navbar-default" role="navigation">
+                        <div class="side-menu-container">
+                            <ul class="nav navbar-nav">
+                                <li class="navbar-header serviceThree">
+                                    <a href="/tch/index.html">
+                                        <div class="serviceThree">
+                                                <span class="glyphicon glyphicon-home"
+                                                      style="padding-left: 30%"></span>
+                                            <span class="title" style="padding-left: 10%">主页</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="1" onclick="jumpto('/tch/teacher_Info.html', this)">
+                                        <div class="serviceThree">
+                                            <span class="glyphicon glyphicon-user" style="padding-left: 30%"></span>
+                                            <span class="title" style="padding-left: 10%">个人信息</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="2" onclick="jumpto('teacher_schedule.html', this)">
+                                        <div class="serviceThree">
+                                            <span class="glyphicon glyphicon-list-alt" style="padding-left: 30%"></span>
+                                            <span class="title" style="padding-left: 10%">上课任务</span>
+                                        </div>
+
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="3" onclick="jumpto('examination_Arrangements.html', this)">
+                                        <div class="serviceThree">
+                                            <span class="glyphicon glyphicon-calendar" style="padding-left: 30%"></span>
+                                            <span class="title" style="padding-left: 10%">考试安排</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="4" onclick="jumpto('teacher_Score.html', this)">
+                                        <div class="serviceThree">
+                                            <span class="glyphicon glyphicon-education"
+                                                  style="padding-left: 30%"></span>
+                                            <span class="title" style="padding-left: 10%">成绩管理</span>
+                                        </div>
+
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="5" onclick="jumpto('teacher_checkWork.html', this)">
+                                        <div class="serviceThree">
+                                            <span class="glyphicon glyphicon-edit" style="padding-left: 30%"></span>
+                                            <span class="title" style="padding-left: 10%">考勤情况</span>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" id="main">
+            <div class="row ">
+                <div class="jumbotron Background1">
+                    <h2>教学后台管理系统 <span class="label label-default">功能介绍</span></h2>
+                    <br>
+                    <p id="name"></p>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <a onclick="done(1)">
+                            <img class="img-circle" src="../img/person.png" alt="Generic placeholder image"
+                                 width="140px" height="140px">
+                            <h2>个人信息</h2>
+                        </a>
+                        <p>查看教师信息，修改教师信息</p>
+                    </div><!-- /.col-lg-4 -->
+                    <div class="col-lg-4">
+                        <a onclick="done(2)">
+                            <img class="img-circle" src="../img/course.png" alt="Generic placeholder image"
+                                 width="140px" height="140px">
+                            <h2>上课任务</h2>
+                        </a>
+                        <p>查看老师的课程安排和课程信息</p>
+                    </div><!-- /.col-lg-4 -->
+                    <div class="col-lg-4">
+                        <a onclick="done(3)">
+                            <img class="img-circle" src="../img/test.png" alt="Generic placeholder image" width="140px"
+                                 height="140px">
+                            <h2>考试安排</h2>
+                        </a>
+                        <p>教师安排考试时间和地点</p>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <a onclick="done(4)">
+                            <img class="img-circle" src="../img/score.png" alt="Generic placeholder image" width="140px"
+                                 height="140px">
+                            <h2>成绩管理</h2>
+                        </a>
+                        <p>查看管理学生的成绩</p>
+                    </div><!-- /.col-lg-4 -->
+                    <div class="col-lg-4">
+                        <a onclick="done(5)">
+                            <img class="img-circle" src="../img/check.png" alt="Generic placeholder image" width="140px"
+                                 height="140px">
+                            <h2>考勤情况</h2>
+                        </a>
+                        <p>统计学生的考勤情况</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

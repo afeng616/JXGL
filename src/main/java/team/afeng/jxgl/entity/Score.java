@@ -7,12 +7,21 @@ package team.afeng.jxgl.entity;
  * Description:
  */
 public class Score {
+    private String cid;
     private String tname;
     private String cname;
     private String name;
     private int chours;
     private int ccredit;
     private int cscore;
+
+    public String getCid() {
+        return cid;
+    }
+
+    public void setCid(String cid) {
+        this.cid = cid;
+    }
 
     public String getName() {
         return name;
