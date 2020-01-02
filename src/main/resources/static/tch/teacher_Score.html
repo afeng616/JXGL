@@ -4,9 +4,24 @@
             $('#main').html(data);
         });
     }
+
     function onSubmit(obj) {
-        console.log($(obj).val());
-        console.log($(obj).parent('tr').children(''));
+        var score = $(obj).val();
+        console.log($(obj).parents('tr').children('.cid')[0].innerHTML);
+        console.log($(obj).parents('tr').children('.id')[0].innerHTML);
+        var cid = $(obj).parents('tr').children('.cid')[0].innerHTML;
+        var id = $(obj).parents('tr').children('.id')[0].innerHTML;
+        $.ajax({
+            type: "post",
+            url: '/tch/ascore',
+            data: {score: score, cid: cid, id: id},
+            success: function () {
+                alert('录入成功');
+            },
+            error: function () {
+                alert('录入失败');
+            }
+        });
     }
 
     function teacher_Score() {
@@ -17,6 +32,7 @@
         var ccredit = null;
         var cscore = null;
         var name = null;
+        var number = null;
         var cid = null;
 
         $.ajax({
@@ -27,14 +43,15 @@
             success: function (jsonobject) {
                 for (var i = 0; i < jsonobject.length; i++) {
                     name = jsonobject[i].name;
+                    number = jsonobject[i].number;
                     tname = jsonobject[i].tname;
                     cname = jsonobject[i].cname;
                     chours = jsonobject[i].chours;
                     ccredit = jsonobject[i].ccredit;
                     cscore = jsonobject[i].cscore;
                     cid = jsonobject[i].cid;
-                    var content = '<tr><td>' + cid + '</td><td>' + cname + '</td><td class="tname">' + tname + '</td><td>' + name + '</td>' +
-                        '<td>' + chours + '</td><td>'+ ccredit + '</td><td>'+ '</td><td><input style="width: 20%; position: relative;left: -35%;" onblur="onSubmit(this)" value="' + cscore + '"></td></tr>';
+                    var content = '<tr><td class="cid">' + cid + '</td><td>' + cname + '</td><td >' + tname + '</td><td class="id">' + number + '</td>' +
+                        '<td>' + name + '</td><td>' + chours + '</td><td>' + ccredit + '</td><td>' + '<input style="width: 20%;" onblur="onSubmit(this)" value="' + cscore + '"></td></tr>';
                     $tbody.append(content);
                 }
             },
@@ -64,6 +81,7 @@
             <th scope="col">课程ID</th>
             <th scope="col">课程名称</th>
             <th scope="col">授课教师</th>
+            <th scope="col">学号</th>
             <th scope="col">学生姓名</th>
             <th scope="col">学时</th>
             <th scope="col">学分</th>

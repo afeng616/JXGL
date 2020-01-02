@@ -1,5 +1,6 @@
 package team.afeng.jxgl.mapper;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,11 @@ public interface TchMapper {
     // 修改密码
     @Update("update tb_tchuser set password=#{pwd} where id=#{id}")
     boolean alterPwd(String id, String pwd);
+    // FIXME: 允许重复录入
+    // 录入成绩
+    @Insert("insert into tb_score " +
+            "value(#{id}, #{cid}, #{score}, #{tid})")
+    boolean insertScore(String id, String cid, String tid, int score);
 
     // 获取姓名
     @Select("select tname from tb_teacher where tid=#{tid}")
@@ -46,7 +52,7 @@ public interface TchMapper {
     List<Exam> queryExam(String tid);
 
     // 查看课程成绩
-    @Select("select tname, tb_course.cid, cname, name, chours, ccredit, cscore from tb_stuinfo " +
+    @Select("select tname, number, tb_course.cid, cname, name, chours, ccredit, cscore from tb_stuinfo " +
             "left outer join tb_score on tb_score.id=tb_stuinfo.number " +
             "inner join tb_teacher on tb_teacher.tid=#{tid} " +
             "inner join tb_course on tb_course.cid = any(select cid from tb_teach where tid='t001') " +

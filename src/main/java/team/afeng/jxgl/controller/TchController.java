@@ -63,6 +63,15 @@ public class TchController {
         return tchMapper.queryStatistics(tid);
     }
 
+    // 录入成绩
+    @RequestMapping("/tch/ascore")
+    @ResponseBody
+    public boolean insertScore(HttpServletRequest request, @RequestParam("id") String id,
+                               @RequestParam("cid") String cid, @RequestParam("score") int score) {
+        String tid = request.getUserPrincipal().getName();
+        return tchMapper.insertScore(id, cid, tid, score);
+    }
+
     // 查看课表
     @RequestMapping("/tch/course")
     @ResponseBody
