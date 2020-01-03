@@ -7,21 +7,29 @@
 
     function onSubmit(obj) {
         var score = $(obj).val();
-        console.log($(obj).parents('tr').children('.cid')[0].innerHTML);
-        console.log($(obj).parents('tr').children('.id')[0].innerHTML);
+        var name = $(obj).parents('tr').children('.name')[0].innerHTML;
+        var cname = $(obj).parents('tr').children('.cname')[0].innerHTML;
         var cid = $(obj).parents('tr').children('.cid')[0].innerHTML;
         var id = $(obj).parents('tr').children('.id')[0].innerHTML;
-        $.ajax({
-            type: "post",
-            url: '/tch/ascore',
-            data: {score: score, cid: cid, id: id},
-            success: function () {
-                alert('录入成功');
-            },
-            error: function () {
-                alert('录入失败');
-            }
-        });
+        var result = confirm("是否确认录入" + name + "-" + cname + "成绩：" + score + "，录入后将禁止修改！！！");
+        if (result) {
+            $.ajax({
+                type: "post",
+                url: '/tch/ascore',
+                data: {score: score, cid: cid, id: id},
+                success: function (data) {
+                    if (data)
+                        alert('录入成功');
+                    else
+                        alert("禁止二次录入");
+                },
+                error: function () {
+                    alert('录入失败');
+                }
+            });
+        } else {
+            alert(name + "-" + cname + "成绩已录入，禁止二次录入！");
+        }
     }
 
     function teacher_Score() {
@@ -50,8 +58,8 @@
                     ccredit = jsonobject[i].ccredit;
                     cscore = jsonobject[i].cscore;
                     cid = jsonobject[i].cid;
-                    var content = '<tr><td class="cid">' + cid + '</td><td>' + cname + '</td><td >' + tname + '</td><td class="id">' + number + '</td>' +
-                        '<td>' + name + '</td><td>' + chours + '</td><td>' + ccredit + '</td><td>' + '<input style="width: 20%;" onblur="onSubmit(this)" value="' + cscore + '"></td></tr>';
+                    var content = '<tr><td class="cid">' + cid + '</td><td class="cname">' + cname + '</td><td >' + tname + '</td><td class="id">' + number + '</td>' +
+                        '<td class="name">' + name + '</td><td>' + chours + '</td><td>' + ccredit + '</td><td>' + '<input style="width: 20%;" onblur="onSubmit(this)" value="' + cscore + '"></td></tr>';
                     $tbody.append(content);
                 }
             },

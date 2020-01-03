@@ -19,7 +19,12 @@ public interface TchMapper {
     // 修改密码
     @Update("update tb_tchuser set password=#{pwd} where id=#{id}")
     boolean alterPwd(String id, String pwd);
-    // FIXME: 允许重复录入
+
+    // 是否录入
+    @Select("select count(*) from tb_score " +
+            "where id=#{id} and cid=#{cid} and tid=#{tid}")
+    boolean queryFor(String id, String cid, String tid);
+
     // 录入成绩
     @Insert("insert into tb_score " +
             "value(#{id}, #{cid}, #{score}, #{tid})")

@@ -69,7 +69,11 @@ public class TchController {
     public boolean insertScore(HttpServletRequest request, @RequestParam("id") String id,
                                @RequestParam("cid") String cid, @RequestParam("score") int score) {
         String tid = request.getUserPrincipal().getName();
-        return tchMapper.insertScore(id, cid, tid, score);
+        if (tchMapper.queryFor(id, cid, tid)) {
+            return false;
+        } else {
+            return tchMapper.insertScore(id, cid, tid, score);
+        }
     }
 
     // 查看课表
